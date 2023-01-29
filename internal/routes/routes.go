@@ -10,8 +10,8 @@ func ConfigureRoutes(r *gin.Engine) *gin.Engine {
 	s := service.NewDefaultService()
 	e := controller.NewExpectativaController(s)
 
-	r.GET("/expectativa-pais", e.ExpectativaDeVidaPorPais)
-	r.GET("/expectativa-idade", e.ExpectativaDeVidaPorIdade)
+	r.GET("/expectativa-pais", e.ExpectativaDeVidaPorPais())
+	r.GET("/expectativa-idade", e.ExpectativaDeVidaPorIdade())
 	r.GET("/hello", controller.HelloWord)
 	return r
 }
