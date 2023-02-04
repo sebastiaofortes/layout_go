@@ -1,6 +1,9 @@
 package controller
 
 import (
+	"net/http"
+	"strconv"
+
 	"github.com/gin-gonic/gin"
 	"github.com/sebastiaofortes/layout_go/internal/service"
 )
@@ -19,12 +22,24 @@ func NewExpectativaController(s service.EsperançaDeVida) ExpectativaController 
 //pois assim podemos passar parametros adicionais e injetar dependencias nas funções de handler
 func (c *ExpectativaController) ExpectativaDeVidaPorPais() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
-		ctx.JSON(200, "expectativa por país")
+		id, err := strconv.Atoi(ctx.Query("pais"))
+		if err != nil {
+			ctx.JSON(http.StatusBadRequest, "ivalid pais id")
+			return
+		}
+		r := c.s.CalcularExpectativaDeVidaPorPais(int32(id))
+		ctx.JSON(200, r)
 	}
 }
 
 func (c *ExpectativaController) ExpectativaDeVidaPorIdade() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
-		ctx.JSON(200, "expectativa por idade")
+		id, err := strconv.Atoi(ctx.Query("idade"))
+		if err != nil {
+			ctx.JSON(http.StatusBadRequest, "ivalid pais id")
+			return
+		}
+		r := c.s.CalcularExpectativaDeVidaPorPais(int32(id))
+		ctx.JSON(200, r)
 	}
 }
