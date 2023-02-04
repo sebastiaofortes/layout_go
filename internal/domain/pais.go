@@ -1,12 +1,12 @@
 package domain
 
 type Pais struct {
-	ExpectativaVida int32
-	IDH             float64
-	baseDeCalculo 	float64
+	ExpectativaVida float32
+	IDH             float32
+	baseDeCalculo 	float32
 }
 
 func (p *Pais) CalularExpectativaDeVida() {
 	resultado := p.IDH * p.baseDeCalculo
-	p.ExpectativaVida = int32(resultado)
+	p.ExpectativaVida = resultado
 }

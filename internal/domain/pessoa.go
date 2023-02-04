@@ -10,6 +10,7 @@ type Pessoa struct {
 	Idade        int32
 	Enfermidades []Enfermidade
 	EstadoFisico EstadoFisico
+	Pais 		 int64
 }
 
 func (p *Pessoa) CalcularEstadoFisico() {
