@@ -1,16 +1,19 @@
 package dao
 
-import "github.com/sebastiaofortes/layout_go/internal/domain"
+import (
+	"github.com/sebastiaofortes/layout_go/internal/platform/db"
+	"github.com/sebastiaofortes/layout_go/internal/platform/dto"
+)
 
-type EstadoFisicoDao struct{
-	
+type EstadoFisicoDao struct {
 }
 
-
-func(p *EstadoFisicoDao)GetEstadoFisico() domain.EstadoFisico{
-	return domain.EstadoFisico{}
+func (p *EstadoFisicoDao) GetEstadoFisico(id int32) dto.EstadoFisico {
+	result := dto.EstadoFisico{}
+	db.Storege.First(&result, id)
+	return result
 }
 
-func NewEstadoFisicoDao()EstadoFisicoDao {
+func NewEstadoFisicoDao() EstadoFisicoDao {
 	return EstadoFisicoDao{}
 }

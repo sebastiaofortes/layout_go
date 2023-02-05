@@ -1,15 +1,22 @@
 package repository
 
-import "github.com/sebastiaofortes/layout_go/internal/domain"
+import (
+	"github.com/sebastiaofortes/layout_go/internal/domain"
+	"github.com/sebastiaofortes/layout_go/internal/platform/dao"
+)
 
 //repository lida com a persistência de agregados
 //para persistir esses dados ele pode usar um dao ou um ORM
 type ImplementsPaisRepository struct{
-
+	paisDao dao.PaisDao
 }
 
-func (p *ImplementsPaisRepository) GetPais(int32)(domain.Pais, error) {
-	return domain.Pais{}, nil
+func (p *ImplementsPaisRepository) GetPais(i int32)(domain.Pais, error) {
+	r := p.paisDao.GetPais(i)
+	return domain.Pais{ExpectativaVida: float32(r.ExpectativaVida),
+		IDH: float32(r.IDH),
+		BaseDeCalculo: float32(r.BaseDeCalculo),
+		}, nil
 }
 
 //Recomenda-se criar métodos de build das implemtaçoes das interfaces para verificar se todos os métodos estão de fato sendo implemetados

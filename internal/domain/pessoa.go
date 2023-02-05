@@ -16,7 +16,7 @@ type Pessoa struct {
 func (p *Pessoa) CalcularEstadoFisico() {
 	var media int64
 	var total int64
-	for i := 0; i <= len(p.Enfermidades); i++ {
+	for i := 0; i < len(p.Enfermidades); i++ {
 		total = total + p.Enfermidades[i].Severidade
 	}
 	media = total / int64(len(p.Enfermidades))

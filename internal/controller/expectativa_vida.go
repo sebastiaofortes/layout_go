@@ -28,7 +28,8 @@ func (c *ExpectativaController) ExpectativaDeVidaPorPais() gin.HandlerFunc {
 			return
 		}
 		r := c.s.CalcularExpectativaDeVidaPorPais(int32(id))
-		ctx.JSON(200, r)
+		str:= strconv.Itoa(int(r))
+		ctx.JSON(200, str)
 	}
 }
 

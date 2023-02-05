@@ -1,6 +1,8 @@
 package service
 
 import (
+	"log"
+
 	"github.com/sebastiaofortes/layout_go/internal/domain"
 	"github.com/sebastiaofortes/layout_go/internal/platform/repository"
 )
@@ -21,7 +23,9 @@ func (d *DefaultService) calcularExpectativaDeVida(pessoa domain.Pessoa, pais do
 
 func (d *DefaultService) CalcularExpectativaDeVidaPorPais(p int32) float32 {
 	Pais, _ := d.paisR.GetPais(p)
+	log.Println(Pais)
 	Listapessoas, _ := d.pessoaR.GetPessoasPorPais(p)
+	log.Println(Listapessoas)
 	var media float32
 	var total float32
 	for _, v := range Listapessoas {
