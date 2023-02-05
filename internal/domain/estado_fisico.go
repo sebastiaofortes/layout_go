@@ -1,6 +1,6 @@
 package domain
 
-type EstadoFisico struct{
-	Classificaçao int64
-	DataAvaliaçao string
+type EstadoFisico struct {
+	Classificaçao int64  `json:"classificacao"`
+	DataAvaliaçao string `json:"data_avaliacao"`
 }

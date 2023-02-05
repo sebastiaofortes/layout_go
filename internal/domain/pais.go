@@ -1,9 +1,9 @@
 package domain
 
 type Pais struct {
-	ExpectativaVida float32
-	IDH             float32
-	baseDeCalculo 	float32
+	ExpectativaVida float32 `json:"expectativa_vida"`
+	IDH             float32 `json:"IDH"`
+	baseDeCalculo 	float32 `json:"base-calculo"`
 }
 
 func (p *Pais) CalularExpectativaDeVida() {

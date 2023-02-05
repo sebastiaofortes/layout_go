@@ -6,11 +6,11 @@ import (
 )
 
 type Pessoa struct {
-	Nome         string
-	Idade        int32
-	Enfermidades []Enfermidade
-	EstadoFisico EstadoFisico
-	Pais 		 int64
+	Nome         string        `json:"nome"`
+	Idade        int32         `json:"idade"`
+	Enfermidades []Enfermidade `json:"enfermidades"`
+	EstadoFisico EstadoFisico  `json:"estado_fisico"`
+	Pais         int64         `json:"pais"`
 }
 
 func (p *Pessoa) CalcularEstadoFisico() {
@@ -19,13 +19,13 @@ func (p *Pessoa) CalcularEstadoFisico() {
 	for i := 0; i <= len(p.Enfermidades); i++ {
 		total = total + p.Enfermidades[i].Severidade
 	}
-	media = total/int64(len(p.Enfermidades))
+	media = total / int64(len(p.Enfermidades))
 	p.EstadoFisico.Classificaçao = media
 	p.atualizarHorario()
 
 }
 
-func (p *Pessoa) atualizarHorario(){
+func (p *Pessoa) atualizarHorario() {
 	horario := time.Now()
 	p.EstadoFisico.DataAvaliaçao = fmt.Sprintln(horario)
 }
