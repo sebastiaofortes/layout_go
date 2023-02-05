@@ -5,7 +5,7 @@ import "github.com/sebastiaofortes/layout_go/internal/domain"
 type Enfermidade struct {
 	Id         int32  `gorm:"primary_key;not null" json:"-"`
 	Nome       string `gorm:"primary_key;not null" json:"nome"`
-	Severidade int64  `json:"severidade"`
+	Severidade float64  `json:"severidade"`
 }
 
 func (e Enfermidade) ToDomain() domain.Enfermidade {
@@ -17,7 +17,7 @@ func (e Enfermidade) ToDomain() domain.Enfermidade {
 
 type EstadoFisico struct {
 	Id            int32  `gorm:"primary_key;not null" json:"-"`
-	Classificaçao int64  `json:"classificacao"`
+	Classificaçao float64  `json:"classificacao"`
 	DataAvaliaçao string `json:"data_avaliacao"`
 }
 

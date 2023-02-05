@@ -2,6 +2,7 @@ package domain
 
 import (
 	"fmt"
+	"log"
 	"time"
 )
 
@@ -14,14 +15,15 @@ type Pessoa struct {
 }
 
 func (p *Pessoa) CalcularEstadoFisico() {
-	var media int64
-	var total int64
+	var media float64
+	var total float64
 	for i := 0; i < len(p.Enfermidades); i++ {
 		total = total + p.Enfermidades[i].Severidade
 	}
-	media = total / int64(len(p.Enfermidades))
+	media = total / float64(len(p.Enfermidades))
 	p.EstadoFisico.Classificaçao = media
 	p.atualizarHorario()
+	log.Println("Estado fisico = media de todas as enfermidades = ", media)
 
 }
 

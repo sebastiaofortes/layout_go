@@ -16,7 +16,9 @@ type DefaultService struct {
 
 func (d *DefaultService) calcularExpectativaDeVida(pessoa domain.Pessoa, pais domain.Pais) float32 {
 	var total float32
+	pais.CalularExpectativaDeVida()
 	pessoa.CalcularEstadoFisico()
+	log.Println("Resultado = ", pais.ExpectativaVida, "* ( ", pessoa.EstadoFisico.Classificaçao, " ) ")
 	total = pais.ExpectativaVida * float32(pessoa.EstadoFisico.Classificaçao)
 	return total
 }
