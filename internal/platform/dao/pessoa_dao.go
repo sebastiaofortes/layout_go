@@ -16,7 +16,13 @@ func (p *PessoaDao) GetPessoa(id int32) dto.Pessoa {
 
 func (p *PessoaDao) GetPessoasPais(id int32) []dto.Pessoa {
 	result := []dto.Pessoa{}
-	db.Storege.Where("pais=1").Find(&result)
+	db.Storege.Where("pais=?", id).Find(&result)
+	return result
+}
+
+func (p *PessoaDao) GetPessoasIdade(id int32) []dto.Pessoa {
+	result := []dto.Pessoa{}
+	db.Storege.Where("idade=?", id).Find(&result)
 	return result
 }
 

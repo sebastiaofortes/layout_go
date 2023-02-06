@@ -29,7 +29,13 @@ func (p *ImplementsPessoaRepository) GetPessoasPorPais(pais int32) ([]domain.Pes
 }
 
 func (p *ImplementsPessoaRepository) GetPessoasPorIdade(idade int32) ([]domain.Pessoa, error) {
-	return []domain.Pessoa{}, nil
+	pes := p.pessoaDao.GetPessoasIdade(idade)
+	result := []domain.Pessoa{}
+	for _, v := range pes {
+		r := p.makePessoa(v)
+		result = append(result, r)
+	}
+	return result, nil
 }
 
 func (p *ImplementsPessoaRepository) makePessoa(pes dto.Pessoa) domain.Pessoa {
