@@ -34,6 +34,11 @@ func Get() *gorm.DB {
 	db.Save(&dto.Pessoa{Id: 1, Nome: "João", Idade: 33, Pais: 1})
 	db.Save(&dto.EstadoFisico{Id: 1, Classificaçao: 0.9, DataAvaliaçao: "10/10/2020"})
 	db.Save(&dto.Enfermidade{Id: 1, Nome: "Teste", Severidade: 0.8})
-	db.Save(&dto.Pais{Id: 1, ExpectativaVida: 60, IDH: 3.5, BaseDeCalculo: 0.4})
+	db.Save(&dto.Pais{Id: 1, ExpectativaVida: 70, IDH: 0.9, BaseDeCalculo: 90.4})
+	
+	db.Save(&dto.Pessoa{Id: 2, Nome: "Maria", Idade: 25, Pais: 1})
+	db.Save(&dto.EstadoFisico{Id: 2, Classificaçao: 0.9, DataAvaliaçao: "10/10/2020"})
+	db.Save(&dto.Enfermidade{Id: 2, Nome: "Teste", Severidade: 0.9})
+	db.Save(&dto.Pais{Id: 1, ExpectativaVida: 70, IDH: 0.9, BaseDeCalculo: 90.4})
 	return db
 }

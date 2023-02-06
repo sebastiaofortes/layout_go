@@ -15,25 +15,26 @@ type DefaultService struct {
 }
 
 func (d *DefaultService) calcularExpectativaDeVida(pessoa domain.Pessoa, pais domain.Pais) float32 {
-	var total float32
+	var result float32
 	pais.CalularExpectativaDeVida()
 	pessoa.CalcularEstadoFisico()
-	log.Println("Resultado = ", pais.ExpectativaVida, "* ( ", pessoa.EstadoFisico.Classificaçao, " ) ")
-	total = pais.ExpectativaVida * float32(pessoa.EstadoFisico.Classificaçao)
-	return total
+	result = pais.ExpectativaVida * float32(pessoa.EstadoFisico.Classificaçao)
+	log.Println("Resultado = [expectativa de vida] ", pais.ExpectativaVida, "* [estado fisico]", pessoa.EstadoFisico.Classificaçao, " = ", result)
+	return result
 }
 
 func (d *DefaultService) CalcularExpectativaDeVidaPorPais(p int32) float32 {
-	Pais, _ := d.paisR.GetPais(p)
-	log.Println(Pais)
-	Listapessoas, _ := d.pessoaR.GetPessoasPorPais(p)
-	log.Println(Listapessoas)
 	var media float32
 	var total float32
-	for _, v := range Listapessoas {
-		total = total + d.calcularExpectativaDeVida(v, Pais)
+	
+	Pais, _ := d.paisR.GetPais(p)
+	Listapessoas, _ := d.pessoaR.GetPessoasPorPais(p)
+	for _, pessoas := range Listapessoas {
+		log.Println("------Nome: ", pessoas.Nome, "Idade: ", pessoas.Idade, "------")
+		total = total + d.calcularExpectativaDeVida(pessoas, Pais)
 	}
 	media = total / float32(len(Listapessoas))
+	log.Println("------ resultado ", media, " ------")
 	return media
 }
 func (d *DefaultService) CalcularExpectativaDeVidaPorIdade(i int32) float32 {

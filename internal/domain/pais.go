@@ -11,5 +11,5 @@ type Pais struct {
 func (p *Pais) CalularExpectativaDeVida() {
 	resultado := p.IDH * p.BaseDeCalculo
 	p.ExpectativaVida = resultado
-	log.Println("Expectativa de vida = ", p.IDH, " * ", p.BaseDeCalculo, " = ", resultado)
+	log.Println("Expectativa de vida do pais = [IDH]", p.IDH, " * [base de calculo]", p.BaseDeCalculo, " = ", resultado)
 }
