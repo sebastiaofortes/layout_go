@@ -14,7 +14,7 @@ type DefaultService struct {
 	paisR   domain.PaisRepository
 }
 
-func (d *DefaultService) calcularExpectativaDeVida(pessoa domain.Pessoa, pais domain.Pais) float32 {
+func (d *DefaultService) calcularExpectativaDeVida(pessoa *domain.Pessoa, pais *domain.Pais) float32 {
 	var result float32
 	pais.CalularExpectativaDeVida()
 	pessoa.CalcularEstadoFisico()
@@ -23,33 +23,45 @@ func (d *DefaultService) calcularExpectativaDeVida(pessoa domain.Pessoa, pais do
 	return result
 }
 
-func (d *DefaultService) CalcularExpectativaDeVidaPorPais(p int32) float32 {
+func (d *DefaultService) CalcularExpectativaDeVidaPorPais(p int32) (float32, error) {
 	var media float32
 	var total float32
 
-	Pais, _ := d.paisR.GetPais(p)
-	Listapessoas, _ := d.pessoaR.GetPessoasPorPais(p)
+	Pais, err := d.paisR.GetPais(p)
+	if err != nil {
+		return media, err
+	}
+	Listapessoas, err := d.pessoaR.GetPessoasPorPais(p)
+	if err != nil {
+		return media, err
+	}
 	for _, pessoa := range Listapessoas {
-		total = total + d.calcularExpectativaDeVida(pessoa, Pais)
+		total = total + d.calcularExpectativaDeVida(&pessoa, &Pais)
 		log.Println("------Nome: ", pessoa.Nome, "Idade: ", pessoa.Idade, "------")
 	}
 	media = total / float32(len(Listapessoas))
 	log.Println("------ resultado ", media, " ------")
-	return media
+	return media, nil
 }
-func (d *DefaultService) CalcularExpectativaDeVidaPorIdade(i int32) float32 {
+func (d *DefaultService) CalcularExpectativaDeVidaPorIdade(i int32) (float32, error) {
 	var media float32
 	var total float32
 
-	Listapessoas, _ := d.pessoaR.GetPessoasPorPais(i)
+	Listapessoas, err := d.pessoaR.GetPessoasPorIdade(i)
+	if err != nil {
+		return media, err
+	}
 	for _, pessoa := range Listapessoas {
-		Pais, _ := d.paisR.GetPais(int32(pessoa.Pais))
-		total = total + d.calcularExpectativaDeVida(pessoa, Pais)
+		Pais, err := d.paisR.GetPais(int32(pessoa.Pais))
+		if err != nil {
+			return media, err
+		}
+		total = total + d.calcularExpectativaDeVida(&pessoa, &Pais)
 		log.Println("------Nome: ", pessoa.Nome, "Idade: ", pessoa.Idade, "------")
 	}
 	media = total / float32(len(Listapessoas))
 	log.Println("------ resultado ", media, " ------")
-	return media
+	return media, nil
 }
 
 // Recomenda-se criar métodos de build das implemtaçoes das interfaces para verificar se todos os métodos estão de fato sendo implemetados

@@ -1,6 +1,8 @@
 package repository
 
 import (
+	"errors"
+
 	"github.com/sebastiaofortes/layout_go/internal/domain"
 	"github.com/sebastiaofortes/layout_go/internal/platform/dao"
 	"github.com/sebastiaofortes/layout_go/internal/platform/dto"
@@ -19,7 +21,10 @@ func (p *ImplementsPessoaRepository) GetAllPessoas() ([]domain.Pessoa, error) {
 }
 
 func (p *ImplementsPessoaRepository) GetPessoasPorPais(pais int32) ([]domain.Pessoa, error) {
-	pes := p.pessoaDao.GetPessoasPais(pais)
+	pes, err := p.pessoaDao.GetPessoasPais(pais)
+	if err != nil {
+		return []domain.Pessoa{}, errors.New("Nenhum resultado encontrado")
+	}
 	result := []domain.Pessoa{}
 	for _, v := range pes {
 		r := p.makePessoa(v)
@@ -29,7 +34,10 @@ func (p *ImplementsPessoaRepository) GetPessoasPorPais(pais int32) ([]domain.Pes
 }
 
 func (p *ImplementsPessoaRepository) GetPessoasPorIdade(idade int32) ([]domain.Pessoa, error) {
-	pes := p.pessoaDao.GetPessoasIdade(idade)
+	pes, err := p.pessoaDao.GetPessoasIdade(idade)
+	if err != nil {
+		return []domain.Pessoa{}, errors.New("Nenhum resultado encontrado")
+	}
 	result := []domain.Pessoa{}
 	for _, v := range pes {
 		r := p.makePessoa(v)

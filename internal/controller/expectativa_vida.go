@@ -28,7 +28,11 @@ func (c *ExpectativaController) ExpectativaDeVidaPorPais() gin.HandlerFunc {
 			ctx.JSON(http.StatusBadRequest, "ivalid pais id")
 			return
 		}
-		r := c.s.CalcularExpectativaDeVidaPorPais(int32(id))
+		r, err := c.s.CalcularExpectativaDeVidaPorPais(int32(id))
+		if err != nil {
+			ctx.JSON(http.StatusNotFound, "not results found")
+			return
+		}
 		str := fmt.Sprintf("%.3f", r)
 		ctx.JSON(200, str)
 	}
@@ -41,7 +45,11 @@ func (c *ExpectativaController) ExpectativaDeVidaPorIdade() gin.HandlerFunc {
 			ctx.JSON(http.StatusBadRequest, "ivalid pais id")
 			return
 		}
-		r := c.s.CalcularExpectativaDeVidaPorPais(int32(id))
+		r, err := c.s.CalcularExpectativaDeVidaPorIdade(int32(id))
+		if err != nil {
+			ctx.JSON(http.StatusNotFound, "not results found")
+			return
+		}
 		ctx.JSON(200, r)
 	}
 }
