@@ -1,4 +1,4 @@
-package service
+package repository
 
 import "github.com/sebastiaofortes/layout_go/internal/domain"
 

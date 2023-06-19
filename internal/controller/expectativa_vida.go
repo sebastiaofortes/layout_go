@@ -6,14 +6,13 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	"github.com/sebastiaofortes/layout_go/internal/service"
 )
 
 type ExpectativaController struct {
-	s service.EsperançaDeVida
+	s EsperançaDeVida
 }
 
-func NewExpectativaController(s service.EsperançaDeVida) ExpectativaController {
+func NewExpectativaController(s EsperançaDeVida) ExpectativaController {
 	c := ExpectativaController{s: s}
 	return c
 }
