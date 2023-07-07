@@ -64,8 +64,6 @@ func (p *ImplementsPessoaRepository) makeEnfermidades(enf []dto.Enfermidade) []d
 	return enfs
 }
 
-// Recomenda-se criar métodos de build das implemtaçoes das interfaces para verificar se todos os métodos estão de fato sendo implemetados
-// nosse função tem como tipo uma interface para que suas impermentações sejam aceitas como objeto de retorno.
-func NewImplementsPessoaRepository() PessoaRepository {
+func NewImplementsPessoaRepository() *ImplementsPessoaRepository {
 	return &ImplementsPessoaRepository{}
 }

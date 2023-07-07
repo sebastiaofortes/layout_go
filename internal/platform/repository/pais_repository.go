@@ -19,8 +19,6 @@ func (p *ImplementsPaisRepository) GetPais(i int32)(domain.Pais, error) {
 		}, nil
 }
 
-//Recomenda-se criar métodos de build das implemtaçoes das interfaces para verificar se todos os métodos estão de fato sendo implemetados
-//nosse função tem como tipo uma interface para que suas impermentações sejam aceitas como objeto de retorno.
-func NewImplementsPaisRepository() PaisRepository{
+func NewImplementsPaisRepository() *ImplementsPaisRepository{
 	return &ImplementsPaisRepository{}
 }
