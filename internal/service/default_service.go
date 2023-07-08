@@ -4,7 +4,6 @@ import (
 	"log"
 
 	"github.com/sebastiaofortes/layout_go/internal/domain"
-	"github.com/sebastiaofortes/layout_go/internal/platform/repository"
 )
 
 // services são camadas que contém a lógica relacionanda a dois ou mais agregados
@@ -66,8 +65,6 @@ func (d *DefaultService) CalcularExpectativaDeVidaPorIdade(i int32) (float32, er
 
 // Recomenda-se criar métodos de build das implemtaçoes das interfaces para verificar se todos os métodos estão de fato sendo implemetados
 // nosse função tem como tipo uma interface para que suas impermentações sejam aceitas como objeto de retorno.
-func NewDefaultService() *DefaultService {
-	pessoaRepo := repository.NewImplementsPessoaRepository()
-	paisRepo := repository.NewImplementsPaisRepository()
+func NewDefaultService(pessoaRepo PessoaRepository, paisRepo PaisRepository) *DefaultService {
 	return &DefaultService{pessoaR: pessoaRepo, paisR: paisRepo}
 }
